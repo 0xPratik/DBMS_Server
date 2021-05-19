@@ -70,10 +70,8 @@ exports.getuser = async (req, res) => {
 exports.postQueries = async (req, res) => {
   const { email, subject, message, hostel_id } = req.body;
   try {
-    console.log(req.body);
     const h_id = Number(hostel_id);
-    console.log("Number", h_id);
-    const contact = pool.query(
+    const contact = await pool.query(
       "INSERT INTO queries(hostel_id,email,subject,message) VALUES($1,$2,$3,$4)",
       [h_id, email, subject, message]
     );

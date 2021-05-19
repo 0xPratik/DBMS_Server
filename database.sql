@@ -22,6 +22,19 @@ CREATE TABLE room(
     PRIMARY KEY(room_id)
 );
 
+ALTER TABLE room DROP CONSTRAINT GENERATED ALWAYS AS IDENTITY
+
+ALTER TABLE room
+ADD COLUMN hostel_id INTEGER REFERENCES hostel(hostel_id);
+
+UPDATE room SET room.room_id = 102 FROM hostel WHERE room.hostel_id = hostel.hostel_id;
+
+INSERT INTO room(hostel_id,room_id) VALUES(5,501);
+
+INSERT INTO room(hostel_id,room_id) VALUES(1,102);
+
+DELETE FROM room WHERE room_id = 5;
+
 CREATE TABLE student(
     student_id INTEGER GENERATED ALWAYS AS IDENTITY,
     fname VARCHAR(100) NOT NULL,
@@ -66,7 +79,7 @@ CREATE TABLE application(
     app_id INTEGER GENERATED ALWAYS AS IDENTITY,
     hostel_id INTEGER REFERENCES hostel(hostel_id),
     email VARCHAR(200) REFERENCES student(email),
-    mob_no VARCHAR(10),
+    mob_no VARCHAR(10) REFERENCES student(mob_no),
     message VARCHAR(100),
     PRIMARY KEY(app_id)
 );
@@ -77,6 +90,10 @@ ALTER TABLE student DROP COLUMN password;
 SHOW TIMEZOME;
 
 -- INSERT INTO HOSTEL(Hostel_name) VALUES('Devta pg'); 
+INSERT INTO room(Hostel_id) VALUES(4); 
+
+ALTER TABLE student 
+
 
 -- CREATE TABLE car(
 --     id BIGSERIAL NOT NULL PRIMARY KEY,

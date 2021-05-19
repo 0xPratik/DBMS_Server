@@ -1,0 +1,10 @@
+GET http://localhost:8000/queries
+
+###
+
+POST http://localhost:8000/createroom
+Content-Type: application/json
+
+{
+    "hostel_id":"1"
+}
